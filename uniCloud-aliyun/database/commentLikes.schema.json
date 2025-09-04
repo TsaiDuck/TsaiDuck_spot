@@ -1,0 +1,35 @@
+{
+  "bsonType": "object",
+  "required": ["userId", "commentId", "createTime"],
+  "permission": {
+    "read": "doc.userId == auth.openid || auth.role == 'admin'",
+    "create": "auth != null",
+    "delete": "doc.userId == auth.openid || auth.role == 'admin'"
+  },
+  "properties": {
+    "_id": {
+      "description": "系统自动生成的唯一ID"
+    },
+    "userId": {
+      "bsonType": "string",
+      "description": "用户ID",
+      "default": { "$env": "auth.openid" }
+    },
+    "commentId": {
+      "bsonType": "string",
+      "description": "被点赞的评论ID",
+      "minLength": 1
+    },
+    "createTime": {
+      "bsonType": "date",
+      "description": "点赞时间",
+      "default": { "$env": "now" }
+    }
+  },
+  "indexes": [
+    { 
+      "keys": { "userId": 1, "commentId": 1 }, 
+      "options": { "name": "idx_user_comment", "unique": true } 
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "bsonType": "object",
+  "required": ["name", "thumbnail", "description", "game", "createTime"],
+  "permission": {
+    "read": true,
+    "create": "auth != null && auth.role == 'admin'",
+    "update": "auth.role == 'admin'",
+    "delete": "auth.role == 'admin'"
+  },
+  "properties": {
+    "_id": {
+      "description": "系统自动生成的唯一ID"
+    },
+    "name": {
+      "bsonType": "string",
+      "description": "地图名称（如“Bind”）",
+      "minLength": 1,
+      "maxLength": 20
+    },
+    "thumbnail": {
+      "bsonType": "string",
+      "description": "地图缩略图URL",
+      "regexp": "^cloud://.*"
+    },
+    "description": {
+      "bsonType": "string",
+      "description": "地图简介",
+      "minLength": 10,
+      "maxLength": 300
+    },
+    "game": {
+      "bsonType": "string",
+      "description": "所属游戏",
+      "enum": ["valorant", "csgo"],
+      "default": "valorant"
+    },
+    "createTime": {
+      "bsonType": "date",
+      "description": "创建时间",
+      "default": { "$env": "now" }
+    },
+    "updateTime": {
+      "bsonType": "date",
+      "description": "更新时间",
+      "default": { "$env": "now" }
+    }
+  }
+}

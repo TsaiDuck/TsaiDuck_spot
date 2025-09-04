@@ -1,0 +1,44 @@
+{
+  "bsonType": "object",
+  "required": ["nickname", "avatar", "createTime", "lastLogin"],
+  "permission": {
+    "read": "doc._id == auth.openid || auth.role == 'admin'",
+    "create": "auth != null",
+    "update": "doc._id == auth.openid || auth.role == 'admin'",
+    "delete": "auth.role == 'admin'"
+  },
+  "properties": {
+    "_id": {
+      "bsonType": "string",
+      "description": "用户唯一ID（微信OpenID）",
+      "default": { "$env": "auth.openid" }
+    },
+    "nickname": {
+      "bsonType": "string",
+      "description": "微信昵称",
+      "minLength": 1,
+      "maxLength": 30
+    },
+    "avatar": {
+      "bsonType": "string",
+      "description": "微信头像URL",
+      "regexp": "^https?://.*"
+    },
+    "gender": {
+      "bsonType": "int",
+      "description": "性别（0-未知，1-男，2-女）",
+      "enum": [0, 1, 2],
+      "default": 0
+    },
+    "createTime": {
+      "bsonType": "date",
+      "description": "首次登录时间",
+      "default": { "$env": "now" }
+    },
+    "lastLogin": {
+      "bsonType": "date",
+      "description": "最后登录时间",
+      "default": { "$env": "now" }
+    }
+  }
+}

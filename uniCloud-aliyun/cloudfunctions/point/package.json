@@ -1,0 +1,7 @@
+{
+  "name": "point",
+  "dependencies": {},
+  "extensions": {
+    "uni-cloud-jql": {}
+  }
+}

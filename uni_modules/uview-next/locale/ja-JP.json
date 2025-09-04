@@ -1,0 +1,86 @@
+{
+	"uAreaPicker.cancelText": "キャンセル",
+	"uAreaPicker.confirmText": "確定",
+	"uAreaPicker.placeholder": "地域を選択してください",
+	
+	"uCalendar.title": "日付選択",
+	"uCalendar.startText": "開始",
+	"uCalendar.endText": "終了",
+	"uCalendar.rangePrompt": "選択した日数が最大数を超えています",
+	"uCalendar.confirmText": "確定",
+	"uCalendar.confirmDisabledText": "確定",
+	"uCalendar.weekdays": "月,火,水,木,金,土,日",
+
+	"uCascader.title": "選択してください",
+	"uCascader.placeholder": "選択してください",
+
+	"uCode.startText": "認証コードを取得",
+	"uCode.changeText": "X秒後に再取得",
+	"uCode.endText": "再取得",
+
+	"uDatetimePicker.cancelText": "キャンセル",
+	"uDatetimePicker.confirmText": "確定",
+	"uDatetimePicker.placeholder": "日付と時間を選択してください",
+
+	"uKeyboard.cancelText": "キャンセル",
+	"uKeyboard.confirmText": "確定",
+
+	"uLink.mpTips": "リンクがコピーされました。ブラウザで開いてください",
+
+	"uLoadingPage.loadingText": "読み込み中",
+
+	"uLoadmore.loadmoreText": "さらに読み込む",
+	"uLoadmore.loadingText": "読み込み中...",
+	"uLoadmore.nomoreText": "これ以上データはありません",
+
+	"uModal.confirmText": "確定",
+	"uModal.cancelText": "キャンセル",
+
+	"uNoNetwork.tips": "あら、ネットワーク信号が失われました",
+
+	"uPagination.prevText": "前のページ",
+	"uPagination.nextText": "次のページ",
+
+	"uPicker.cancelText": "キャンセル",
+	"uPicker.confirmText": "確定",
+
+	"uReadMore.closeText": "全文を展開して読む",
+	"uReadMore.openText": "折りたたむ",
+
+	"uSearch.placeholder": "キーワードを入力してください",
+	"uSearch.actionText": "検索",
+
+	"uSection.subTitle": "さらに",
+
+	"uTable.emptyText": "データがありません",
+
+	"uToolbar.cancelText": "キャンセル",
+	"uToolbar.confirmText": "確定",
+	
+	"uSignature.title": "署名してください",
+	"uSignature.clearText": "クリア",
+	"uSignature.undoText": "元に戻す",
+	"uSignature.confirmText": "確定",
+	"uSignature.closeText": "閉じる",
+
+	"uSelect.placeholder": "選択してください",
+	"uSelect.emptyText": "データがありません",
+	
+	"uPaging.refresherDefaultText": "続けて下にスワイプ",
+	"uPaging.refresherPullingText": "更新を解除",
+	"uPaging.refresherRefreshingText": "更新中...",
+	"uPaging.refresherCompleteText": "更新完了",
+	"uPaging.loadingMoreDefaultText": "さらに読み込む...",
+	"uPaging.loadingMoreNoMoreText": "さらにデータはありません",
+
+	"uColorPicker.title": "色を選択",
+	"uColorPicker.confirmText": "確定",
+
+	"uCropper.loadImageError": "画像の読み込みに失敗しました",
+	"uCropper.chooseImageError": "画像の選択に失敗しました",
+	"uCropper.cropError": "画像の切り抜きに失敗しました",
+	"uCropper.chooseImage": "画像を先に選択してください",
+	"uCropper.cropping": "画像の切り抜き中...",
+	"uCropper.cancelText": "キャンセル",
+	"uCropper.confirmText": "確定"
+}

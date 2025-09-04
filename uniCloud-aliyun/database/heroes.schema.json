@@ -1,0 +1,60 @@
+{
+  "bsonType": "object",
+  "required": ["name", "avatar", "description", "game", "createTime"],
+  "permission": {
+    "read": true,
+    "create": "auth != null",
+    "update": "doc.userId == auth.openid || auth.role == 'admin'",
+    "delete": "auth.role == 'admin'"
+  },
+  "properties": {
+    "_id": {
+      "description": "系统自动生成的唯一ID"
+    },
+    "name": {
+      "bsonType": "string",
+      "description": "英雄名称（如“猎枭”）",
+      "minLength": 1,
+      "maxLength": 20
+    },
+    "avatar": {
+      "bsonType": "string",
+      "description": "英雄头像URL（云存储fileID）",
+      "regexp": "^cloud://.*"
+    },
+    "description": {
+      "bsonType": "string",
+      "description": "英雄简介",
+      "minLength": 10,
+      "maxLength": 500
+    },
+    "skills": {
+      "bsonType": "array",
+      "description": "技能列表",
+      "items": {
+        "bsonType": "object",
+        "properties": {
+          "name": { "bsonType": "string", "minLength": 1 },
+          "icon": { "bsonType": "string", "regexp": "^cloud://.*" },
+          "description": { "bsonType": "string", "minLength": 5 }
+        }
+      }
+    },
+    "game": {
+      "bsonType": "string",
+      "description": "所属游戏",
+      "enum": ["valorant", "csgo"],
+      "default": "valorant"
+    },
+    "createTime": {
+      "bsonType": "date",
+      "description": "创建时间",
+      "default": { "$env": "now" }
+    },
+    "updateTime": {
+      "bsonType": "date",
+      "description": "更新时间",
+      "default": { "$env": "now" }
+    }
+  }
+}

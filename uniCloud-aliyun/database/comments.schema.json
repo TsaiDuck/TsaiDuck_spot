@@ -1,0 +1,68 @@
+{
+  "bsonType": "object",
+  "required": ["pointId", "userId", "content", "createTime"],
+  "permission": {
+    "read": true,
+    "create": "auth != null",
+    "update": "doc.userId == auth.openid || auth.role == 'admin'",
+    "delete": "doc.userId == auth.openid || auth.role == 'admin'"
+  },
+  "properties": {
+    "_id": {
+      "description": "系统自动生成的唯一ID"
+    },
+    "pointId": {
+      "bsonType": "string",
+      "description": "关联点位ID",
+      "minLength": 1
+    },
+    "userId": {
+      "bsonType": "string",
+      "description": "评论者ID",
+      "default": { "$env": "auth.openid" }
+    },
+    "content": {
+      "bsonType": "string",
+      "description": "评论内容",
+      "minLength": 1,
+      "maxLength": 500
+    },
+    "floor": {
+      "bsonType": "int",
+      "description": "楼层号（主评论才有）",
+      "default": 0,
+      "minimum": 0
+    },
+    "parentId": {
+      "bsonType": ["string", "null"],
+      "description": "父评论ID（回复时填写）",
+      "default": null
+    },
+    "replyToUserId": {
+      "bsonType": ["string", "null"],
+      "description": "被回复者ID",
+      "default": null
+    },
+    "replyToFloor": {
+      "bsonType": ["int", "null"],
+      "description": "被回复的楼层号",
+      "default": null,
+      "minimum": 1
+    },
+    "likes": {
+      "bsonType": "int",
+      "description": "评论点赞数",
+      "default": 0,
+      "minimum": 0
+    },
+    "createTime": {
+      "bsonType": "date",
+      "description": "创建时间",
+      "default": { "$env": "now" }
+    }
+  },
+  "indexes": [
+    { "keys": { "pointId": 1, "parentId": 1 }, "options": { "name": "idx_point_parent" } },
+    { "keys": { "createTime": 1 }, "options": { "name": "idx_createTime" } }
+  ]
+}

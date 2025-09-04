@@ -1,0 +1,103 @@
+{
+  "bsonType": "object",
+  "required": ["title", "description", "mapId", "images", "difficulty", "userId", "status", "createTime"],
+  "permission": {
+    "read": "doc.userId == auth.openid || auth.role == 'admin'",
+    "create": "auth != null",
+    "update": "auth.role == 'admin' || (doc.userId == auth.openid && doc.status == 'pending')",
+    "delete": "auth.role == 'admin' || (doc.userId == auth.openid && doc.status == 'pending')"
+  },
+  "properties": {
+    "_id": {
+      "description": "系统自动生成的唯一ID"
+    },
+    "title": {
+      "bsonType": "string",
+      "description": "投稿点位标题",
+      "minLength": 2,
+      "maxLength": 50
+    },
+    "description": {
+      "bsonType": "string",
+      "description": "点位说明",
+      "minLength": 10,
+      "maxLength": 1000
+    },
+    "heroId": {
+      "bsonType": ["string", "null"],
+      "description": "关联英雄ID",
+      "default": null
+    },
+    "mapId": {
+      "bsonType": "string",
+      "description": "关联地图ID",
+      "minLength": 1
+    },
+    "images": {
+      "bsonType": "array",
+      "description": "点位图片URL数组",
+      "minItems": 1,
+      "maxItems": 5,
+      "items": { "bsonType": "string", "regexp": "^cloud://.*" }
+    },
+    "coordinates": {
+      "bsonType": "string",
+      "description": "坐标描述",
+      "maxLength": 100,
+      "default": ""
+    },
+    "difficulty": {
+      "bsonType": "int",
+      "description": "难度",
+      "enum": [1, 2, 3],
+      "default": 2
+    },
+    "tags": {
+      "bsonType": "array",
+      "description": "标签数组",
+      "items": { "bsonType": "string" },
+      "maxItems": 5,
+      "default": []
+    },
+    "userId": {
+      "bsonType": "string",
+      "description": "投稿用户ID",
+      "default": { "$env": "auth.openid" }
+    },
+    "status": {
+      "bsonType": "string",
+      "description": "审核状态",
+      "enum": ["pending", "approved", "rejected"],
+      "default": "pending"
+    },
+    "reason": {
+      "bsonType": "string",
+      "description": "拒绝原因",
+      "maxLength": 500,
+      "default": ""
+    },
+    "reviewerId": {
+      "bsonType": ["string", "null"],
+      "description": "审核员ID",
+      "default": null
+    },
+    "reviewTime": {
+      "bsonType": ["date", "null"],
+      "description": "审核时间",
+      "default": null
+    },
+    "createTime": {
+      "bsonType": "date",
+      "description": "投稿时间",
+      "default": { "$env": "now" }
+    },
+    "updateTime": {
+      "bsonType": "date",
+      "description": "更新时间",
+      "default": { "$env": "now" }
+    }
+  },
+  "indexes": [
+    { "keys": { "userId": 1, "status": 1 }, "options": { "name": "idx_user_status" } }
+  ]
+}

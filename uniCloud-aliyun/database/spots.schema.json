@@ -1,0 +1,98 @@
+{
+  "bsonType": "object",
+  "required": ["title", "description", "mapId", "images", "difficulty", "userId", "createTime"],
+  "permission": {
+    "read": true,
+    "create": "auth != null",
+    "update": "doc.userId == auth.openid || auth.role == 'admin'",
+    "delete": "doc.userId == auth.openid || auth.role == 'admin'"
+  },
+  "properties": {
+    "_id": {
+      "description": "系统自动生成的唯一ID"
+    },
+    "title": {
+      "bsonType": "string",
+      "description": "点位标题（如“A点烟雾弹”）",
+      "minLength": 2,
+      "maxLength": 50
+    },
+    "description": {
+      "bsonType": "string",
+      "description": "点位说明",
+      "minLength": 10,
+      "maxLength": 1000
+    },
+    "heroId": {
+      "bsonType": ["string", "null"],
+      "description": "关联英雄ID（null表示通用）",
+      "default": null
+    },
+    "mapId": {
+      "bsonType": "string",
+      "description": "关联地图ID",
+      "minLength": 1
+    },
+    "images": {
+      "bsonType": "array",
+      "description": "点位图片URL数组",
+      "minItems": 1,
+      "maxItems": 5,
+      "items": {
+        "bsonType": "string",
+        "regexp": "^cloud://.*"
+      }
+    },
+    "coordinates": {
+      "bsonType": "string",
+      "description": "坐标描述",
+      "maxLength": 100,
+      "default": ""
+    },
+    "difficulty": {
+      "bsonType": "int",
+      "description": "难度（1-简单，2-中等，3-困难）",
+      "enum": [1, 2, 3],
+      "default": 2
+    },
+    "tags": {
+      "bsonType": "array",
+      "description": "标签数组",
+      "items": { "bsonType": "string" },
+      "maxItems": 5,
+      "default": []
+    },
+    "likes": {
+      "bsonType": "int",
+      "description": "点赞数",
+      "default": 0,
+      "minimum": 0
+    },
+    "views": {
+      "bsonType": "int",
+      "description": "浏览量",
+      "default": 0,
+      "minimum": 0
+    },
+    "userId": {
+      "bsonType": "string",
+      "description": "发布者ID（微信OpenID）",
+      "default": { "$env": "auth.openid" }
+    },
+    "createTime": {
+      "bsonType": "date",
+      "description": "创建时间",
+      "default": { "$env": "now" }
+    },
+    "updateTime": {
+      "bsonType": "date",
+      "description": "更新时间",
+      "default": { "$env": "now" }
+    }
+  },
+  "indexes": [
+    { "keys": { "mapId": 1 }, "options": { "name": "idx_mapId" } },
+    { "keys": { "heroId": 1 }, "options": { "name": "idx_heroId" } },
+    { "keys": { "likes": -1 }, "options": { "name": "idx_likes" } }
+  ]
+}
